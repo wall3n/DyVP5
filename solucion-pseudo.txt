@@ -1,0 +1,80 @@
+Funcion DyV(p: entero, q: entero, m: entero, c: caracter, A: cadena): Registro
+    // p, q: índices que definen el segmento de A a procesar
+    // m: umbral de tamaño mínimo para usar solución directa
+    // c: carácter a buscar
+    // A: cadena (o arreglo) de caracteres
+    var h: entero;
+    var resultado: Registro;
+    
+    si esPequeno(p, q, m) entonces
+        resultado <- SolucionDirecta(p, q, m, c, A);
+    sino
+        h <- Dividir(p, q);
+        resultado <- Combinar(DyV(p, h, m, c, A), DyV(h + 1, q, m, c, A), h, m, c, A);
+    fin si;
+    
+    devolver resultado;
+FinFuncion
+
+
+Funcion esPequeno(p: entero, q: entero, m: entero): booleano
+    devolver ((q - p + 1) <= m);
+FinFuncion
+
+
+Funcion Dividir(p: entero, q: entero): entero
+    devolver (p + q) / 2;
+FinFuncion
+
+
+Funcion SolucionDirecta(p: entero, q: entero, m: entero, c: caracter, A: cadena): Registro
+    si ((q - p + 1) < m) entonces
+        devolver { maxI: 0, maxC: 0 };
+    sino
+        var maxI, maxC, contVentana, i: entero;
+        maxI <- 0; maxC <- 0; contVentana <- 0;
+        
+        para i desde p hasta m hacer
+            si (A[i] = c) entonces
+                contVentana <- contVentana + 1;
+            fin si;
+        fin para;
+        
+        si (contVentana > maxC) entonces
+            maxC <- contVentana;
+        fin si;
+        
+        para i desde m + 1 hasta q hacer
+            si (A[i] = c) entonces
+                contVentana <- contVentana + 1;
+            fin si;
+            
+            si (A[i - m] = c) entonces
+                contVentana <- contVentana - 1;
+            fin si;
+            
+            si (contVentana > maxC) entonces
+                maxC <- contVentana;
+                maxI <- i - m + 1;
+            fin si;
+        fin para;
+        
+        devolver { maxI: maxI, maxC: maxC };
+    fin si;
+FinFuncion
+
+Funcion Combinar(s1: Registro, s2: Registro, h: entero, m: entero, c: caracter, A: cadena): Registro
+    si (s1.maxC = m) entonces
+        devolver s1;
+    fin si;
+    
+    si (s2.maxC = m) entonces
+        devolver s2;
+    fin si;
+    
+    var solucionFrontera: Registro;
+    solucionFrontera <- SolucionDirecta(h - m + 1, h + m - 1, m, c, A);
+    
+    // Asumimos que la función max() compara los campos maxC de cada registro y devuelve el mayor.
+    devolver max(s1, s2, solucionFrontera);
+FinFuncion
