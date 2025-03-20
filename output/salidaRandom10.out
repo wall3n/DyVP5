@@ -1,0 +1,21 @@
+La solucion de la cadena ( aaaacccccaaacc ) m=5 c=c maxI: 4 maxc: 5
+
+La solucion de la cadena ( baaaba ) m=3 c=a maxI: 1 maxc: 3
+
+La solucion de la cadena ( zzzzyzzzx ) m=4 c=z maxI: 0 maxc: 4
+
+La solucion de la cadena ( xxaybzcxdex ) m=6 c=x maxI: 0 maxc: 2
+
+La solucion de la cadena ( mmmmmmm ) m=3 c=m maxI: 0 maxc: 3
+
+La solucion de la cadena ( aqaqaqbqc ) m=4 c=q maxI: 0 maxc: 2
+
+La solucion de la cadena ( sttattsttatt ) m=5 c=t maxI: 1 maxc: 4
+
+La solucion de la cadena ( beeveelegends ) m=4 c=e maxI: 1 maxc: 3
+
+La solucion de la cadena ( abracadabra ) m=3 c=r maxI: 0 maxc: 1
+
+La solucion de la cadena ( hello world ) m=2 c=o maxI: 3 maxc: 1
+
+Saliendo...
