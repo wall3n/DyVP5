@@ -1,8 +1,8 @@
-programa: main.o divide-y-venceras.o
-	g++ main.o divide-y-venceras.o -o programa
-main.o: main.cpp divide-y-venceras.hpp
-	g++ -c main.cpp
-divide-y-venceras.o: divide-y-venceras.cpp divide-y-venceras.hpp
-	g++ -c divide-y-venceras.cpp
+programa: build/main.o build/divide-y-venceras.o
+	g++ build/main.o build/divide-y-venceras.o -o programa
+build/main.o: src/main.cpp src/divide-y-venceras.hpp
+	g++ -c src/main.cpp -o build/main.o
+build/divide-y-venceras.o: src/divide-y-venceras.cpp src/divide-y-venceras.hpp
+	g++ -c src/divide-y-venceras.cpp -o build/divide-y-venceras.o
 clean:
-	rm -fr main.o divide-y-venceras.o
+	rm -fr build/main.o build/divide-y-venceras.o
