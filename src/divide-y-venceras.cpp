@@ -3,12 +3,12 @@
 using namespace std;
 
 /*
-* Determina si el problema es lo suficientemente pequeño para resolverlo directamente.
-* @param p Índice de inicio. 
-* @param q Índice de fin.
-* @param m Tamaño de la ventana. 
-* @return True si el tamaño de la cadena es menor o igual al tamaño requerido de la ventana, False en caso contrario. 
-*/
+ * Determina si el problema es lo suficientemente pequeño para resolverlo directamente.
+ * @param p Índice de inicio. 
+ * @param q Índice de fin.
+ * @param m Tamaño de la ventana. 
+ * @return True si el tamaño de la cadena es menor o igual al tamaño requerido de la ventana, False en caso contrario. 
+ */
 bool esPequeno(int p, int q, int m){
     return ((q - p + 1) <= m );
 }
@@ -24,14 +24,14 @@ int Dividir(int p, int q){
 }
 
 /*
-* Encuentra la posición de inicio y el número máximo de apariciones del carácter C en una ventana de tamaño m dentro de la cadena [p, q].
-* @param p Índice de inicio.
-* @param q Índice de fin.
-* @param m Tamaño de la ventana.
-* @param c Carácter a buscar.
-* @param A Cadena en la que se busca el carácter.
-* @return Una estructura Solucion con el índice de inicio y el máximo numero de apariciones del carácter c en la ventana m.
-*/
+ * Encuentra la posición de inicio y el número máximo de apariciones del carácter C en una ventana de tamaño m dentro de la cadena [p, q].
+ * @param p Índice de inicio.
+ * @param q Índice de fin.
+ * @param m Tamaño de la ventana.
+ * @param c Carácter a buscar.
+ * @param A Cadena en la que se busca el carácter.
+ * @return Una estructura Solucion con el índice de inicio y el máximo numero de apariciones del carácter c en la ventana m.
+ */
 Solucion SolucionDirecta(int p, int q, int m, char c, string A){
     Solucion sol = {.maxi = 0, .maxc = 0};
     if(( q - p + 1) < m){
@@ -64,6 +64,16 @@ Solucion SolucionDirecta(int p, int q, int m, char c, string A){
     }
 }
 
+/*
+ * Combina las soluciones de los subproblemas y encuentra la mejor solución.
+ * @param s1 Solución del subproblema izquierdo.
+ * @param s2 Solución del subproblema derecho.
+ * @param h Índice del punto medio.
+ * @param m Tamaño de la ventana.
+ * @param c Carácter a buscar.
+ * @param A Cadena en la que se busca el carácter.
+ * @return La mejor solución entre los subproblemas y la solución en la frontera entre ellos.
+ */
 Solucion Combinar(Solucion s1, Solucion s2, int h, int m, char c, string A){
     if(s1.maxc == m){
         return s1;
@@ -86,7 +96,15 @@ Solucion Combinar(Solucion s1, Solucion s2, int h, int m, char c, string A){
         return solucionFrontera;
     }
 };
-
+/*
+ * Algoritmo recursivo de Divide y Vencerás.
+ * @param p Índice de inicio.
+ * @param q Índice de fin.
+ * @param m Tamaño de la ventana.
+ * @param c Carácter a buscar.
+ * @param A Cadena en la que se busca el carácter.
+ * @return La mejor solución encontrada.
+ */
 Solucion DyV(int p, int q, int m, char c, string A){
     int h;
     Solucion resultado;
