@@ -51,7 +51,7 @@ int main(int argc, char **argv){
 
     for(int i = 0; i < n_casos; i++){
         int n = rand() % 1000001 + 100;
-        string line = to_string(n) + "," + to_string(caso_prueba(n)) + "\n";
+        string line = to_string(n) + ";" + to_string(caso_prueba(n)) + "\n";
         outputFile << line;
     }
 
