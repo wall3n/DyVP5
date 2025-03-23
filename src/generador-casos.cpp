@@ -47,11 +47,14 @@ int main(int argc, char **argv){
     }
     
     ofstream outputFile;
-    outputFile.open(file, ios::trunc);
+    outputFile.open(file, ios::app);
 
     for(int i = 0; i < n_casos; i++){
         int n = rand() % 1000001 + 100;
-        string line = to_string(n) + ";" + to_string(caso_prueba(n)) + "\n";
+        double resultado = caso_prueba(n);
+        string res_str = to_string(resultado);
+        replace(res_str.begin(), res_str.end(), '.', ',');
+        string line = to_string(n) + ";" + res_str + "\n";
         outputFile << line;
     }
 
