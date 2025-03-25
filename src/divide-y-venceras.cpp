@@ -1,4 +1,5 @@
 #include "divide-y-venceras.hpp"
+#include <algorithm>
 
 using namespace std;
 
@@ -74,7 +75,7 @@ Solucion SolucionDirecta(int p, int q, int m, char c, const string &A){
  * @param A Cadena en la que se busca el carácter.
  * @return La mejor solución entre los subproblemas y la solución en la frontera entre ellos.
  */
-Solucion Combinar(Solucion s1, Solucion s2, int h, int m, char c, const string &A){
+Solucion Combinar(Solucion s1, Solucion s2, int h, int m, char c, const string &A, int p, int q){
     if(s1.maxc == m){
         return s1;
     }
@@ -82,7 +83,9 @@ Solucion Combinar(Solucion s1, Solucion s2, int h, int m, char c, const string &
         return s2;
     }
 
-    Solucion solucionFrontera = SolucionDirecta(h - m + 1, h + m - 1, m ,c , A);
+    int inicio_f = max(p, h-m+1);
+    int fin_f = min(q, h+m-1);
+    Solucion solucionFrontera = SolucionDirecta(inicio_f, fin_f, m ,c , A);
     if(s1.maxc >= s2.maxc && s1.maxc >= solucionFrontera.maxc){
         return s1;
     } else if (s2.maxc >= s1.maxc && s2.maxc >= solucionFrontera.maxc){
@@ -108,7 +111,7 @@ Solucion DyV(int p, int q, int m, char c, const string &A){
         resultado = SolucionDirecta(p, q, m, c, A);
     } else {
         h = Dividir(p, q);
-        resultado = Combinar(DyV(p,h,m,c,A), DyV(h+1,q,m,c,A), h, m, c, A);
+        resultado = Combinar(DyV(p,h,m,c,A), DyV(h+1,q,m,c,A), h, m, c, A, p, q);
     }
     return resultado;
 }
