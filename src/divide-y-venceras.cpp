@@ -32,7 +32,7 @@ int Dividir(int p, int q){
  * @param A Cadena en la que se busca el carácter.
  * @return Una estructura Solucion con el índice de inicio y el máximo numero de apariciones del carácter c en la ventana m.
  */
-Solucion SolucionDirecta(int p, int q, int m, char c, string A){
+Solucion SolucionDirecta(int p, int q, int m, char c, const string &A){
     Solucion sol = {.maxi = 0, .maxc = 0};
     if(( q - p + 1) < m){
         return sol;
@@ -74,7 +74,7 @@ Solucion SolucionDirecta(int p, int q, int m, char c, string A){
  * @param A Cadena en la que se busca el carácter.
  * @return La mejor solución entre los subproblemas y la solución en la frontera entre ellos.
  */
-Solucion Combinar(Solucion s1, Solucion s2, int h, int m, char c, string A){
+Solucion Combinar(Solucion s1, Solucion s2, int h, int m, char c, const string &A){
     if(s1.maxc == m){
         return s1;
     }
@@ -83,11 +83,6 @@ Solucion Combinar(Solucion s1, Solucion s2, int h, int m, char c, string A){
     }
 
     Solucion solucionFrontera = SolucionDirecta(h - m + 1, h + m - 1, m ,c , A);
-    /*
-    cout << "S1 = maxi: " << s1.maxi << " maxc: " << s1.maxc << endl;
-    cout << "S2 = maxi: " << s2.maxi << " maxc: " << s2.maxc << endl;
-    cout << "SF = maxi: " << solucionFrontera.maxi << " maxc: " << solucionFrontera.maxc << endl;
-    */
     if(s1.maxc >= s2.maxc && s1.maxc >= solucionFrontera.maxc){
         return s1;
     } else if (s2.maxc >= s1.maxc && s2.maxc >= solucionFrontera.maxc){
@@ -105,7 +100,7 @@ Solucion Combinar(Solucion s1, Solucion s2, int h, int m, char c, string A){
  * @param A Cadena en la que se busca el carácter.
  * @return La mejor solución encontrada.
  */
-Solucion DyV(int p, int q, int m, char c, string A){
+Solucion DyV(int p, int q, int m, char c, const string &A){
     int h;
     Solucion resultado;
 
@@ -113,9 +108,6 @@ Solucion DyV(int p, int q, int m, char c, string A){
         resultado = SolucionDirecta(p, q, m, c, A);
     } else {
         h = Dividir(p, q);
-        /*
-        cout << "h es " << h << endl;
-        */
         resultado = Combinar(DyV(p,h,m,c,A), DyV(h+1,q,m,c,A), h, m, c, A);
     }
     return resultado;

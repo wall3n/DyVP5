@@ -10,8 +10,8 @@ struct Solucion {
     int maxc;
 };
 
-Solucion SolucionDirecta(int p, int q, int m, char c, string A);
+Solucion SolucionDirecta(int p, int q, int m, char c, const string &A);
 
-Solucion DyV(int p, int q, int m, char c, string A);
+Solucion DyV(int p, int q, int m, char c, const string &A);
 
 #endif
