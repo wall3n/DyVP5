@@ -1,5 +1,7 @@
-all: programa generador
+all: directorio programa generador 
 
+directorio:
+	mkdir -p build data
 generador: build/generador-casos.o build/divide-y-venceras.o
 	g++ build/generador-casos.o build/divide-y-venceras.o -o generador
 programa: build/main.o build/divide-y-venceras.o
