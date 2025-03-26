@@ -81,7 +81,10 @@ Funcion Combinar(s1: Registro, s2: Registro, h: entero,
 	finsi;
     
 	var solucionFrontera: Registro;
-	solucionFrontera <- SolucionDirecta(h - m + 1, h + m - 1, m, c, A);
+    var inicio_f, fin_f: entero;
+    inicio_f <- max(p, h - m + 1);
+    fin_f <- min(q, h + m - 1);
+	solucionFrontera <- SolucionDirecta(inicio_f, fin_f, m, c, A);
     
 	// Asumimos que la función max() compara los 
       // campos maxC de cada registro y devuelve el mayor
