@@ -71,7 +71,7 @@ Funcion SolucionDirecta(p: entero, q: entero, m: entero,
 FinFuncion
 
 Funcion Combinar(s1: Registro, s2: Registro, h: entero, 
-                  m: entero, c: caracter, A: cadena): Registro
+                  m: entero, c: caracter, A: cadena, p: entero, q: entero): Registro
 	si (s1.maxC = m) entonces
     	     devolver s1;
 	finsi;
